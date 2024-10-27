@@ -54,15 +54,18 @@ function jumpscare.Create(config)
 
     tween.Completed:Connect(function()
         jumpScareGui:Destroy()
-        if config.Audio.AC then
-            jumpScareSound.Ended:Connect(function()
-                jumpScareSound:Destroy()
-            end)
-        else
+    end)
+
+    if config.Audio.AC then
+        jumpScareSound.Ended:Connect(function()
+            jumpScareSound:Destroy()
+        end)
+    else
+        jumpScareSound.Ended:Connect(function()
             jumpScareSound:Stop() -- 停止音频播放
             jumpScareSound:Destroy()
-        end
-    end)
+        end)
+    end
 
     return {
         Run = function()
