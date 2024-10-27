@@ -1,0 +1,11 @@
+local jumpscare = loadstring(game:HttpGet("https://raw.githubusercontent.com/munciseek/NIDO-HUD//main/Custom-jumpscare/Source"))()
+local JS = jumpscare.Create({
+    image = {
+        Asset = "rbxassetid://You-image-ID"
+    },
+    Audio = {
+        Asset = "rbxassetid://You-Audio-ID",
+        AC = false -- Play full audio
+    }
+})
+JS:Run()
