@@ -52,16 +52,17 @@ function jumpscare.Create(config)
     local tween = TweenService:Create(jumpScareImage, tweenInfo, {Size = UDim2.new(2, 0, 2, 0), Position = UDim2.new(0.5, 0, 0.5, 0)})
     tween:Play()
 
-    tween.Completed:Connect(function()
-        jumpScareGui:Destroy()
-        if config.Audio.AC then
-            jumpScareSound.Ended:Connect(function()
-                jumpScareSound:Destroy()
-            end)
-        else
+    if config.Audio.AC then
+        jumpScareSound.Ended:Connect(function()
+            jumpScareGui:Destroy()
             jumpScareSound:Destroy()
-        end
-    end)
+        end)
+    else
+        tween.Completed:Connect(function()
+            jumpScareGui:Destroy()
+            jumpScareSound:Destroy()
+        end)
+    end
     
     return {
         Run = function()
