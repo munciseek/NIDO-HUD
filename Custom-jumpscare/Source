@@ -61,10 +61,8 @@ function jumpscare.Create(config)
             jumpScareSound:Destroy()
         end)
     else
-        jumpScareSound.Ended:Connect(function()
-            jumpScareSound:Stop() -- 停止音频播放
-            jumpScareSound:Destroy()
-        end)
+        jumpScareSound:Stop() -- 停止音频播放
+        jumpScareSound:Destroy()
     end
 
     return {
