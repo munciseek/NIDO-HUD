@@ -32,8 +32,9 @@ function jumpscare.Create(config)
     jumpScareSound:Play()
 
     local originalPos = jumpScareImage.Position
+    local shakeRange = config.image.RA or {30, -30}
     local shake = RunService.RenderStepped:Connect(function()
-        jumpScareImage.Position = originalPos + UDim2.fromOffset(math.random(config.image.RA[1], config.image.RA[2]), math.random(config.image.RA[1], config.image.RA[2]))
+        jumpScareImage.Position = originalPos + UDim2.fromOffset(math.random(shakeRange[1], shakeRange[2]), math.random(shakeRange[1], shakeRange[2]))
     end)
 
     spawn(function()
