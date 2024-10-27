@@ -28,7 +28,14 @@ function jumpscare.Create(config)
 
     local jumpScareSound = Instance.new("Sound")
     jumpScareSound.SoundId = config.Audio.Asset or "rbxassetid://1234567"
-    jumpScareSound.Parent = SoundService
+    
+    -- 放置音频在界面上
+    if config.Audio.AC then
+        jumpScareSound.Parent = SoundService
+    else
+        jumpScareSound.Parent = jumpScareGui
+    end
+    
     jumpScareSound:Play()
 
     local originalPos = jumpScareImage.Position
@@ -54,12 +61,16 @@ function jumpscare.Create(config)
 
     tween.Completed:Connect(function()
         jumpScareGui:Destroy()
-        if config.Audio.AC then
-            jumpScareSound.Ended:Connect(function()
-                jumpScareSound:Destroy()
-            end)
+        if not config.Audio.AC then
+            jumpScareSound:Destroy()
         end
     end)
+
+    if config.Audio.AC then
+        jumpScareSound.Ended:Connect(function()
+            jumpScareSound:Destroy()
+        end)
+    end
 
     return {
         Run = function()
